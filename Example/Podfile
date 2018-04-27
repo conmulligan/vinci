@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'Vinci_Example' do
+  pod 'Vinci', :path => '../'
+
+  target 'Vinci_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
