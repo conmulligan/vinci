@@ -1,11 +1,10 @@
 use_frameworks!
+platform :ios, '10.0'
 
 target 'Vinci_Example' do
   pod 'Vinci', :path => '../'
 
   target 'Vinci_Tests' do
     inherit! :search_paths
-
-    
   end
 end

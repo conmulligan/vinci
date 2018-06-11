@@ -1,0 +1,6 @@
+framework module Vinci {
+  umbrella header "Vinci-umbrella.h"
+
+  export *
+  module * { export * }
+}
