@@ -26,8 +26,18 @@ Note: Vinci is early in development and, although stable, is missing some import
 You can use the shared `Vinci` singleton and the `request` factory method to fetch an image like so:
 
 ```swift
-Vinci.shared.request(with: url) { image, isCached in
+Vinci.shared.request(with: url) { (image, isCached) in
     imageView.image = image
+}
+```
+
+You can pass an optional transformation closure to modify the image before it's passed to the completion handerl:
+
+```swift
+Vinci.shared.request(with: url, transformHandler: { (image) -> UIImage in
+    return transform(image)
+}) { (image, isCached) in
+    cell.photoView.image = image
 }
 ```
 

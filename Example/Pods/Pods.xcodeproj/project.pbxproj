@@ -21,7 +21,9 @@
 		9842B367E3F9742C6F717817AC47417D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D88AAE1F92055A60CC2FC970D7D34634 /* Foundation.framework */; };
 		9A1D7C52B00414F5D49F07F0478B4451 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D88AAE1F92055A60CC2FC970D7D34634 /* Foundation.framework */; };
 		B0CBA22C73AB45413F9971F1A7AAD7DA /* VinciRequestOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141531C645786D618BDAE0EF5150D1A1 /* VinciRequestOperation.swift */; };
+		E13E698520F97940009A3EA5 /* UIImage+Transforms.swift in Sources */ = {isa = PBXBuildFile; fileRef = E13E698320F97908009A3EA5 /* UIImage+Transforms.swift */; };
 		E1B65BCB20CE2D1200CC6FDC /* Data+Base64.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B65BC920CE2D0A00CC6FDC /* Data+Base64.swift */; };
+		E1EB1BDF20D06AC3007409C4 /* Transformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1EB1BDD20D067D3007409C4 /* Transformer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,7 +76,9 @@
 		C7DCB310716CCA63E9711D783C2C0379 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D0017FE23978246036086694EDF1D5F5 /* Pods-Vinci_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Vinci_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
 		D88AAE1F92055A60CC2FC970D7D34634 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		E13E698320F97908009A3EA5 /* UIImage+Transforms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIImage+Transforms.swift"; path = "Vinci/Classes/UIImage+Transforms.swift"; sourceTree = "<group>"; };
 		E1B65BC920CE2D0A00CC6FDC /* Data+Base64.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Data+Base64.swift"; path = "Vinci/Classes/Data+Base64.swift"; sourceTree = "<group>"; };
+		E1EB1BDD20D067D3007409C4 /* Transformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transformer.swift; sourceTree = "<group>"; };
 		E61DF772E1286CFABDF96295A6795C20 /* Pods_Vinci_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Vinci_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E72A2ED2D9AFCC67BE53D893C5E9FD60 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EB2586E677FDC9B8AE0619CBA23C64F2 /* Pods-Vinci_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Vinci_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
@@ -213,6 +217,8 @@
 				B20E12960DE3E76EA30FA3DF9B6E0243 /* VinciCache.swift */,
 				BA7CB4F4C43B08EF423A363627905BF7 /* VinciRequest.swift */,
 				141531C645786D618BDAE0EF5150D1A1 /* VinciRequestOperation.swift */,
+				E1EB1BDD20D067D3007409C4 /* Transformer.swift */,
+				E13E698320F97908009A3EA5 /* UIImage+Transforms.swift */,
 				7B8733A1B0F50FF4ABA75B6FA9EFF3BD /* Pod */,
 				CDAB9609D514A3C40DF0BFAB7A3B6279 /* Support Files */,
 			);
@@ -367,8 +373,10 @@
 				7565069EC484182500077D67C1D0F775 /* Vinci-dummy.m in Sources */,
 				2AA306BECC81A9C89C95B0C7E527BCBC /* Vinci.swift in Sources */,
 				E1B65BCB20CE2D1200CC6FDC /* Data+Base64.swift in Sources */,
+				E1EB1BDF20D06AC3007409C4 /* Transformer.swift in Sources */,
 				902E95A570DD6AF8E7FEE8FBEEBFD86F /* VinciCache.swift in Sources */,
 				64BFD7DDC1431598D3AA325B9E9FB158 /* VinciRequest.swift in Sources */,
+				E13E698520F97940009A3EA5 /* UIImage+Transforms.swift in Sources */,
 				B0CBA22C73AB45413F9971F1A7AAD7DA /* VinciRequestOperation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

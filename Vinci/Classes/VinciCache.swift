@@ -85,7 +85,9 @@ open class VinciCache {
         let url = directory.appendingPathComponent(filename)
         
         if FileManager.default.fileExists(atPath: url.path) {
-            os_log("Cached file exists at %@.", type: .debug, url.path)
+            if Vinci.debugMode {
+                os_log("Cached file exists at %@.", type: .debug, url.path)
+            }
             
             image = UIImage(contentsOfFile: url.path)
             

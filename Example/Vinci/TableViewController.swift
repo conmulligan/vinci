@@ -9,6 +9,7 @@
 import UIKit
 import Vinci
 
+/// A `Codable` struct representing an iTunes API entity.
 struct Entity: Decodable {
     let wrapperType: String
     let artworkUrl100: String?
@@ -16,10 +17,39 @@ struct Entity: Decodable {
     let collectionName: String?
 }
 
+/// A `Codable` struct representing an iTunes API entity collection.
 struct EntityResponse: Decodable {
     let results: [Entity]
 }
 
+/// An example of a custom transformer that applies a gaussian blur filter to the image.
+open class BlurTransformer: Transformer {
+    public var identifier: String
+    
+    public init() {
+        self.identifier = "vinci.example.blur"
+    }
+    
+    public func doTransform(image: UIImage) -> UIImage {
+        let ciImage = CIImage(cgImage: image.cgImage!)
+        
+        let filter = CIFilter(name: "CIGaussianBlur")
+        filter?.setValue(ciImage, forKey: kCIInputImageKey)
+        filter?.setValue(8, forKey: kCIInputRadiusKey)
+        
+        guard let outputImage = filter?.outputImage else {
+            return image
+        }
+        
+        guard let cgImage = CIContext().createCGImage(outputImage, from: ciImage.extent) else {
+            return image
+        }
+        
+        return UIImage(cgImage: cgImage)
+    }
+}
+
+/// Renders a list of Rolling Stones albums using the iTunes API.
 class TableViewController: UITableViewController {
     let searchURL = URL(string: "https://itunes.apple.com/search?term=the+rolling+stones&entity=album")!
     let cellID = "PhotoCell"
@@ -30,6 +60,8 @@ class TableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        Vinci.debugMode = true
         
         self.loadData()
     }
@@ -73,7 +105,7 @@ class TableViewController: UITableViewController {
         alertController.addAction(UIAlertAction(title: "OK", style: .cancel))
         self.present(alertController, animated: true)
     }
-    
+
     // MARK: - Table View Data Source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -93,8 +125,19 @@ class TableViewController: UITableViewController {
         cell.subtitleLabel.text = entity.artistName
         
         if let str = entity.artworkUrl100, let url = URL(string: str) {
-            Vinci.shared.request(with: url) { image, isCached in
-                cell.photoView.image = image
+            if indexPath.row % 2 == 0 {
+                Vinci.shared.request(with: url) { (image, isCached) in
+                    cell.photoView.image = image
+                }
+            } else {
+                let transformers: [Transformer] = [
+                    ScaleTransformer(size: CGSize(width: 90, height: 90)),
+                    DesaturateTransformer(),
+                    BlurTransformer()
+                ]
+                Vinci.shared.request(with: url, transformers: transformers) { (image, isCached) in
+                    cell.photoView.image = image
+                }
             }
         }
         

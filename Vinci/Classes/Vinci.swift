@@ -59,6 +59,9 @@ open class Vinci {
     /// The shared `Vinci` instance.
     public static let shared = Vinci(session: URLSession.shared, cache: VinciCache())
     
+    /// Debug mode enabled.
+    public static var debugMode = false
+    
     // MARK: - Initialization
     
     /// The default initializer.
@@ -93,10 +96,10 @@ open class Vinci {
     /// - Returns: A new `VinciRequest` instance.
     @discardableResult
     public func request(with url: URL,
-                        transformHandler: VinciRequest.TransformHandler?,
+                        transformers: [Transformer]?,
                         completionHandler: @escaping VinciRequest.CompletionHandler) -> VinciRequest {
         let request = VinciRequest(vinci: self)
-        request.get(url: url, transformHandler: transformHandler, completionHandler: completionHandler)
+        request.get(url: url, transformers: transformers, completionHandler: completionHandler)
         return request
     }
     
@@ -109,7 +112,7 @@ open class Vinci {
     /// - Returns: A new `VinciRequest` instance.
     @discardableResult
     public func request(with url: URL, completionHandler: @escaping VinciRequest.CompletionHandler) -> VinciRequest {
-        return self.request(with: url, transformHandler: nil, completionHandler: completionHandler)
+        return self.request(with: url, transformers: nil, completionHandler: completionHandler)
     }
     
     // MARK: - Operations
