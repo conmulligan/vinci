@@ -118,6 +118,7 @@ class TableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: self.cellID, for: indexPath) as! PhotoCell
+        cell.tag = indexPath.row
         
         let entity = self.entities[indexPath.row]
         
@@ -127,16 +128,19 @@ class TableViewController: UITableViewController {
         if let str = entity.artworkUrl100, let url = URL(string: str) {
             if indexPath.row % 2 == 0 {
                 Vinci.shared.request(with: url) { (image, isCached) in
-                    cell.photoView.image = image
+                    if cell.tag == indexPath.row {
+                        cell.photoView.image = image
+                    }
                 }
             } else {
                 let transformers: [Transformer] = [
-                    ScaleTransformer(size: CGSize(width: 90, height: 90)),
-                    DesaturateTransformer(),
+                    MonoTransformer(color: UIColor.blue),
                     BlurTransformer()
                 ]
                 Vinci.shared.request(with: url, transformers: transformers) { (image, isCached) in
-                    cell.photoView.image = image
+                    if cell.tag == indexPath.row {
+                        cell.photoView.image = image
+                    }
                 }
             }
         }

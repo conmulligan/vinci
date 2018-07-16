@@ -141,3 +141,22 @@ open class Vinci {
         }
     }
 }
+
+/// Extend Vinci with helper functions.
+extension Vinci {
+    
+    // MARK: - Utilities
+    
+    /// Generates a URL from the supplied `URL` and `Transformer` instances.
+    /// The generated URL uses each transformer's `identifier` property to uniquely identify
+    /// the transformed image.
+    ///
+    /// - Parameters:
+    ///   - url: The base URL of the image resource.
+    ///   - transformers: An array of transformers.
+    /// - Returns: The generated URL.
+    func keyFor(url: URL, transformers: [Transformer]) -> URL {
+        let identifiers = transformers.map { "[\($0.identifier)]" }
+        return url.appendingPathComponent(identifiers.joined(separator: ""))
+    }
+}

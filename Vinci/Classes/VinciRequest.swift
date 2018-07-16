@@ -108,7 +108,7 @@ open class VinciRequest {
                 if let transformers = transformers, transformers.count > 0 {
                     image = self.doTransforms(image: image, transformers: transformers)
                     
-                    self.vinci.cache.setObject(image, forKey: self.keyFor(url: url, transformers: transformers))
+                    self.vinci.cache.setObject(image, forKey: self.vinci.keyFor(url: url, transformers: transformers))
                 }
                 
                 // Return the image on the main thread.
@@ -127,28 +127,15 @@ open class VinciRequest {
         operation?.cancel()
     }
     
-    /// Generates a URL from the supplied `URL` and `Transformer` instances.
-    /// The generated URL uses each transformer's `identifier` property to uniquely identify
-    /// the transformed image.
-    ///
-    /// - Parameters:
-    ///   - url: The base URL of the image resource.
-    ///   - transformers: An array of transformers.
-    /// - Returns: The generated URL.
-    private func keyFor(url: URL, transformers: [Transformer]) -> URL {
-        let identifiers = transformers.map { $0.identifier }
-        return url.appendingPathComponent(identifiers.joined(separator: "_"))
-    }
-    
     private func cachedImage(for url: URL, transformers: [Transformer]?, memoryOnly: Bool) -> UIImage? {
         var image: UIImage? = nil
         
         // If any transformers have been set, check if a check version of the image exists.
         if let transformers = transformers, transformers.count > 0 {
             if memoryOnly {
-                image = self.vinci.cache.objectFromMemory(forKey: self.keyFor(url: url, transformers: transformers))
+                image = self.vinci.cache.objectFromMemory(forKey: self.vinci.keyFor(url: url, transformers: transformers))
             } else {
-                image = self.vinci.cache.object(forKey: self.keyFor(url: url, transformers: transformers))
+                image = self.vinci.cache.object(forKey: self.vinci.keyFor(url: url, transformers: transformers))
             }
         }
         
@@ -165,7 +152,7 @@ open class VinciRequest {
                 if let transformers = transformers, transformers.count > 0 {
                     image = self.doTransforms(image: image!, transformers: transformers)
                     
-                    self.vinci.cache.setObject(image!, forKey: self.keyFor(url: url, transformers: transformers))
+                    self.vinci.cache.setObject(image!, forKey: self.vinci.keyFor(url: url, transformers: transformers))
                 }
             }
         }

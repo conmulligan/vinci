@@ -49,11 +49,13 @@ open class ClosureTransformer: Transformer {
 
 /// Scales an image to a specific size.
 open class ScaleTransformer: Transformer {
-    public var identifier: String
+    public var identifier: String {
+        return "vinci.scale.\(self.size.width)x\(self.size.height)"
+    }
+    
     public var size: CGSize
     
     public init(size: CGSize) {
-        self.identifier = "vinci.scale"
         self.size = size
     }
     
@@ -62,31 +64,46 @@ open class ScaleTransformer: Transformer {
     }
 }
 
-/// Desaturates an image using a `CoreImage` filter.
-open class DesaturateTransformer: Transformer {
-    public var identifier: String
+/// Remaps colors so they fall within shades of a single color using CIColorMonochrome.
+/// The default color is black.
+open class MonoTransformer: Transformer {
+    // TODO: Use a shorter color ID; e.g. a hex code.
+    public var identifier: String {
+        return "vinci.mono.\(self.color.hexString)_\(self.intensity)"
+    }
+    
+    public var color = UIColor.black
+    public var intensity: Float = 1.0
     
     public init() {
-        self.identifier = "vinci.desaturate"
+        
+    }
+    
+    public convenience init(color: UIColor) {
+        self.init()
+        self.color = color
+    }
+    
+    public convenience init(color: UIColor, intensity: Float) {
+        self.init()
+        self.color = color
+        self.intensity = intensity
     }
     
     public func doTransform(image: UIImage) -> UIImage {
-        let ciImage = CIImage(cgImage: image.cgImage!)
+        guard let cgImage = image.cgImage else { return image }
+        
+        let ciImage = CIImage(cgImage: cgImage)
         
         let filter = CIFilter(name: "CIColorMonochrome")
         filter?.setValue(ciImage, forKey: kCIInputImageKey)
+        filter?.setValue(CIColor(color: self.color), forKey: kCIInputColorKey)
+        filter?.setValue(self.intensity, forKey: kCIInputIntensityKey)
         
-        filter?.setValue(CIColor.black, forKey: kCIInputColorKey)
-        filter?.setValue(1.0, forKey: kCIInputIntensityKey)
-        
-        guard let outputImage = filter?.outputImage else {
+        guard let output = filter?.outputImage, let cgi = CIContext().createCGImage(output, from: output.extent) else {
             return image
         }
         
-        guard let cgImage = CIContext().createCGImage(outputImage, from: outputImage.extent) else {
-            return image
-        }
-        
-        return UIImage(cgImage: cgImage)
+        return UIImage(cgImage: cgi)
     }
 }

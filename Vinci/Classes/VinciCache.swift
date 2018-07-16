@@ -54,10 +54,9 @@ open class VinciCache {
     /// - parameter key: A `URL` value acting as a key.
     /// - returns: A `UIImage` instance if one exists; otherwise, nil.
     public func object(forKey key: URL) -> UIImage? {
-        var image: UIImage?
         
         // First, check the in-memory cache.
-        image = self.objectFromMemory(forKey: key)
+        var image = self.objectFromMemory(forKey: key)
         
         // If the in-memory cache doesn't have a copy of the image, check the disk cache.
         if image == nil {
@@ -92,8 +91,8 @@ open class VinciCache {
             image = UIImage(contentsOfFile: url.path)
             
             // After fetching an image from the disk, save it to the in-memory cache.
-            if let img = image {
-                self.memCache.setObject(img, forKey: key as NSURL)
+            if let image = image {
+                self.memCache.setObject(image, forKey: key as NSURL)
             }
         }
         
@@ -124,7 +123,8 @@ open class VinciCache {
         } else {
             data = UIImagePNGRepresentation(obj)
         }
-
+        
+        // Create the directory if it doesn't exist.
         if !manager.fileExists(atPath: directory.path) {
             do {
                 try manager.createDirectory(atPath: directory.path,
@@ -135,6 +135,7 @@ open class VinciCache {
             }
         }
 
+        // If a file with the same path already exists, delete it.
         if manager.fileExists(atPath: url.path) {
             do {
                 try manager.removeItem(atPath: url.path)
@@ -143,6 +144,7 @@ open class VinciCache {
             }
         }
 
+        // Write the file to disk.
         do {
             try data.write(to: url, options: .atomic)
         } catch {
