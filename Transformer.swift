@@ -67,7 +67,6 @@ open class ScaleTransformer: Transformer {
 /// Remaps colors so they fall within shades of a single color using CIColorMonochrome.
 /// The default color is black.
 open class MonoTransformer: Transformer {
-    // TODO: Use a shorter color ID; e.g. a hex code.
     public var identifier: String {
         return "vinci.mono.\(self.color.hexString)_\(self.intensity)"
     }

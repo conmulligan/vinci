@@ -71,27 +71,38 @@ class TableViewController: UITableViewController {
     }
 
     // MARK: - Data
-    
+
+    /// Requests data from the iTunes Search API, parses the response and update the UI.
     func loadData() {
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        
         let task = URLSession.shared.dataTask(with: self.searchURL) { (data, response, error) in
             DispatchQueue.main.async {
                 UIApplication.shared.isNetworkActivityIndicatorVisible = false
             }
             
+            // If the data task returned nil data, show an error message.
             guard data != nil else {
                 let message = error?.localizedDescription ?? "data task returned nil data."
-                self.showError(message: "Error fetching data: \(message)")
+                DispatchQueue.main.async {
+                    self.showError(message: "Error fetching data: \(message)")
+                }
                 return
             }
             
+            // Attempt to parse the JSON response.
+            // If the JSON decoder failed to decode the response, show an error message.
             do {
                 let response = try JSONDecoder().decode(EntityResponse.self, from: data!)
                 self.entities = response.results.filter({ $0.artworkUrl100 != nil })
             } catch {
-                self.showError(message: "Error decoding JSON: \(error.localizedDescription)")
+                DispatchQueue.main.async {
+                    self.showError(message: "Error decoding JSON: \(error.localizedDescription)")
+                }
+                return
             }
             
+            // Reload the table view.
             DispatchQueue.main.async {
                 self.tableView.reloadSections([0], with: .automatic)
             }
