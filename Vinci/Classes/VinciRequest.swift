@@ -69,7 +69,7 @@ open class VinciRequest {
         // Check if a memory cached version of the image exists.
         if let image = self.cachedImage(for: url, transformers: transformers, memoryOnly: true) {
             if Vinci.debugMode {
-                os_log("Returning disk cached transformed image for %@.", type: .debug, url.path)
+                os_log("Returning memory cached transformed image for %@.", type: .debug, url.path)
             }
             
             completionHandler(image, true)

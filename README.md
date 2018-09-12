@@ -12,14 +12,15 @@ Note: Vinci is early in development and, although stable, is missing some import
 ## Roadmap
 
 ### Done
-- Asychronous image downloading.
-- Download queue.
-- Transformation closures.
-- Combined memory and disk cache.
+- Asychronous image downloading (0.1.0).
+- Download queue (0.1.0).
+- Combined memory and disk cache (0.1.0).
+- Image transformers (0.2.0).
+- Support for caching images post-transformation (0.2.0).
 
 ### Outstanding
 - Automatic cache expiration.
-- Support for caching images post-transformation.
+- `UIImageView` binding.
 
 ## Usage
 
@@ -31,16 +32,6 @@ Vinci.shared.request(with: url) { (image, isCached) in
 }
 ```
 
-You can pass an optional transformation closure to modify the image before it's passed to the completion handerl:
-
-```swift
-Vinci.shared.request(with: url, transformHandler: { (image) -> UIImage in
-    return transform(image)
-}) { (image, isCached) in
-    cell.photoView.image = image
-}
-```
-
 A `Vinci` instance can also initialized with custom `URLSession` and `VinciCache` instances:
 
 ```swift
@@ -48,6 +39,27 @@ let session = URLSession.shared
 let cache = VinciCache()
 let vinci = Vinci(session: session, cache: cache)
 ```
+
+### Transformers
+
+You can pass an optional array of `Transformers` to modify the image before it's passed to the completion hander:
+
+```swift
+let transformers: [Transformer] = [
+    MonoTransformer(color: UIColor.gray, intensity: 1.0),
+    ScaleTransformer(size: imageView.frame.size)
+]
+Vinci.shared.request(with: url, transformers: transformers) { (image, isCached) in
+    imageView.image = image
+}
+```
+Vinci includes a number of transformers by default:
+
+* `ScaleTransformer` scales an image to a specific size.
+* `MonoTransformer` uses `CIColorMonochrome` to color tint an image.
+* `ClosureTransformer` accepts a closure which applies a custom transformation.
+
+Additional transformers can be created by implementing the `Transformer` protocol.
 
 ## Example
 
@@ -65,7 +77,7 @@ pod 'Vinci'
 
 ## Author
 
-conmulligan, conmulligan@gmail.com
+Conor Mulligan, conmulligan@gmail.com
 
 ## License
 

@@ -137,21 +137,13 @@ class TableViewController: UITableViewController {
         cell.subtitleLabel.text = entity.artistName
         
         if let str = entity.artworkUrl100, let url = URL(string: str) {
-            if indexPath.row % 2 == 0 {
-                Vinci.shared.request(with: url) { (image, isCached) in
-                    if cell.tag == indexPath.row {
-                        cell.photoView.image = image
-                    }
-                }
-            } else {
-                let transformers: [Transformer] = [
-                    MonoTransformer(color: UIColor.blue),
-                    BlurTransformer()
-                ]
-                Vinci.shared.request(with: url, transformers: transformers) { (image, isCached) in
-                    if cell.tag == indexPath.row {
-                        cell.photoView.image = image
-                    }
+            let transformers: [Transformer] = [
+                MonoTransformer(color: UIColor.gray, intensity: 1.0),
+                ScaleTransformer(size: cell.photoView.frame.size)
+            ]
+            Vinci.shared.request(with: url, transformers: transformers) { (image, isCached) in
+                if cell.tag == indexPath.row {
+                    cell.photoView.image = image
                 }
             }
         }
