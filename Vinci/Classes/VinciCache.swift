@@ -117,11 +117,11 @@ open class VinciCache {
         let data: Data!
 
         if self.isJPG(filename) {
-            data = UIImageJPEGRepresentation(obj, 1)
+            data = obj.jpegData(compressionQuality: 1)
         } else if self.isPNG(filename) {
-            data = UIImagePNGRepresentation(obj)
+            data = obj.pngData()
         } else {
-            data = UIImagePNGRepresentation(obj)
+            data = obj.pngData()
         }
         
         // Create the directory if it doesn't exist.
