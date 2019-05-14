@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'Vinci'
-    s.version          = '0.2.2'
+    s.version          = '0.2.3'
     s.license          = { :type => 'MIT', :file => 'LICENSE' }
     s.summary          = 'Asynchronous image downloader and cache for iOS.'
     s.homepage         = 'https://github.com/conmulligan/Vinci'

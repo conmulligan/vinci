@@ -97,7 +97,9 @@ open class VinciRequest {
                 
                 // If the image is nil, call the completion handler and bail out.
                 guard var image = image else {
-                    completionHandler(nil, false)
+                    DispatchQueue.main.async {
+                        completionHandler(nil, false)
+                    }
                     return
                 }
                 
