@@ -8,22 +8,21 @@
 
 /* Begin PBXBuildFile section */
 		22FD2AB284BE1FCFC6B92F632F2DDF90 /* Pods-Vinci_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 415F51D00CC3A5D18D89DF4B6D9BE96C /* Pods-Vinci_Tests-dummy.m */; };
-		264960A6F76E5F36C715636DD63B609E /* UIImage+Transforms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47971308771230B830C6975E8D9FE7D3 /* UIImage+Transforms.swift */; };
-		2BAF108F1DE6E0A4A7A4DEE12EE41BC2 /* Data+Base64.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B40D0175D6ADD0738EFA55298F45A7B /* Data+Base64.swift */; };
 		2FE8FF1F518EB8DD2F2E0F664087662D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40CB39E715FBCDAA142E6513E126200A /* Foundation.framework */; };
 		37FC812E6E42DD09B06AD7F6B91E7501 /* Pods-Vinci_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = FF26F48F442B2EA64D32354633C44EE6 /* Pods-Vinci_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		56D93460A3423319BC3FA4B0599652E7 /* Pods-Vinci_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F039D07742BEE71CD636515C0883AFA /* Pods-Vinci_Example-dummy.m */; };
-		65A52A49BBFDDD3AC1B40E35DD05CF39 /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB256C4CCF0D9EE012B28B40BE5E7A6 /* UIColor+Hex.swift */; };
 		7A3CFEDCA8E7BD89705370C3FB2F8FF9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECF2A2B0720AE923C22BED3192888BE0 /* UIKit.framework */; };
-		8F565973E76B6B2522EE8BC84A3BDACA /* Transformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0C3C5A9A92A7368DF36B4715F1F956 /* Transformer.swift */; };
-		965EC582FD876073D5011B7CA8D3CD29 /* VinciRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC9AABDFE7081FD066CCF08B23CAB6D /* VinciRequest.swift */; };
 		A01576596BCD6A0705BBBB4BBCC1E49C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40CB39E715FBCDAA142E6513E126200A /* Foundation.framework */; };
-		A1FC9F71F62606D112FC1F710D1E9265 /* VinciRequestOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F586BF3190F20699C9ECBDFA0070D1D /* VinciRequestOperation.swift */; };
-		B4EF68B0800D79855626197FA748C65E /* Vinci-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = A2818DB6A22F717E12124C5E935F63E9 /* Vinci-dummy.m */; };
-		BFEC378D5E9CFFBC25A8567C4AFB8685 /* Vinci.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1629CDD7BF101432ED30AB457D04873D /* Vinci.swift */; };
 		CC955A5E80F10B05B8BDE449B6ED35D8 /* Vinci-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 151E36F866008D5664B015B1C97B664C /* Vinci-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CD78C0B3B59CC21F4EDC4D50258EACE0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40CB39E715FBCDAA142E6513E126200A /* Foundation.framework */; };
-		EF2034FCC9898552D17E6B09FD53E1FF /* VinciCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE23E4EE2C5DB08E45B8AB774D7D9AD /* VinciCache.swift */; };
+		E1E17A7422D7DA8D001DA62A /* Transformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E17A6C22D7DA8D001DA62A /* Transformer.swift */; };
+		E1E17A7522D7DA8D001DA62A /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E17A6D22D7DA8D001DA62A /* UIColor+Hex.swift */; };
+		E1E17A7622D7DA8D001DA62A /* VinciCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E17A6E22D7DA8D001DA62A /* VinciCache.swift */; };
+		E1E17A7722D7DA8D001DA62A /* UIImage+Transforms.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E17A6F22D7DA8D001DA62A /* UIImage+Transforms.swift */; };
+		E1E17A7822D7DA8D001DA62A /* Data+Base64.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E17A7022D7DA8D001DA62A /* Data+Base64.swift */; };
+		E1E17A7922D7DA8D001DA62A /* VinciRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E17A7122D7DA8D001DA62A /* VinciRequest.swift */; };
+		E1E17A7A22D7DA8D001DA62A /* VinciRequestOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E17A7222D7DA8D001DA62A /* VinciRequestOperation.swift */; };
+		E1E17A7B22D7DA8D001DA62A /* Vinci.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E17A7322D7DA8D001DA62A /* Vinci.swift */; };
 		FAB96D1ABFDA1D27952BCE367EB13A9D /* Pods-Vinci_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 856D2AF7DAACFD59518CBFC32DEB2A7B /* Pods-Vinci_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
@@ -48,16 +47,12 @@
 		0D8585A448416B00526225784B2C06B0 /* Vinci.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Vinci.xcconfig; sourceTree = "<group>"; };
 		10BABF15BA41D04294C582494340B503 /* Pods-Vinci_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Vinci_Example.release.xcconfig"; sourceTree = "<group>"; };
 		151E36F866008D5664B015B1C97B664C /* Vinci-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Vinci-umbrella.h"; sourceTree = "<group>"; };
-		1629CDD7BF101432ED30AB457D04873D /* Vinci.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Vinci.swift; path = Vinci/Classes/Vinci.swift; sourceTree = "<group>"; };
 		1F4372DE82CD9B15E8BAEE6EC120D972 /* Pods-Vinci_Example-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Vinci_Example-Info.plist"; sourceTree = "<group>"; };
-		1F586BF3190F20699C9ECBDFA0070D1D /* VinciRequestOperation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = VinciRequestOperation.swift; path = Vinci/Classes/VinciRequestOperation.swift; sourceTree = "<group>"; };
 		3B65EA3F3F3BE896E052BB5695124E26 /* Pods-Vinci_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Vinci_Example.modulemap"; sourceTree = "<group>"; };
 		40CB39E715FBCDAA142E6513E126200A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		415F51D00CC3A5D18D89DF4B6D9BE96C /* Pods-Vinci_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Vinci_Tests-dummy.m"; sourceTree = "<group>"; };
 		42FED63561703125CA209211CC1D36EB /* Pods-Vinci_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Vinci_Example-frameworks.sh"; sourceTree = "<group>"; };
 		451D2BBB609921A72C26309E23BC9840 /* Vinci.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Vinci.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		47971308771230B830C6975E8D9FE7D3 /* UIImage+Transforms.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UIImage+Transforms.swift"; path = "Vinci/Classes/UIImage+Transforms.swift"; sourceTree = "<group>"; };
-		4A0C3C5A9A92A7368DF36B4715F1F956 /* Transformer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Transformer.swift; path = Vinci/Classes/Transformer.swift; sourceTree = "<group>"; };
 		589A8B754B8863D714DA924A543815CF /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		5C362E35A6CB01AC6C3E3F791C153D09 /* Pods-Vinci_Tests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Vinci_Tests-Info.plist"; sourceTree = "<group>"; };
 		61ECBD767E071853320950F9BC262CAD /* Pods_Vinci_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Vinci_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -65,25 +60,29 @@
 		68E1A61541CDEA8B023D0989F1F4EB0E /* Pods-Vinci_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Vinci_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
 		6A1500147EDA6944693B3E9EEC0D058C /* Vinci.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Vinci.modulemap; sourceTree = "<group>"; };
 		6FEF11202FF1D8BACC770F936668526F /* Vinci-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Vinci-Info.plist"; sourceTree = "<group>"; };
-		7B40D0175D6ADD0738EFA55298F45A7B /* Data+Base64.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Data+Base64.swift"; path = "Vinci/Classes/Data+Base64.swift"; sourceTree = "<group>"; };
 		7F039D07742BEE71CD636515C0883AFA /* Pods-Vinci_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Vinci_Example-dummy.m"; sourceTree = "<group>"; };
 		81F608F5A7980DCFBFE87FB61447FA7E /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		81FCC5D94C4CB0CD3B5CB60AC445EC06 /* Pods-Vinci_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Vinci_Tests.modulemap"; sourceTree = "<group>"; };
 		8485E58DE126F99FA2D641A7A53EF2BC /* Pods_Vinci_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Vinci_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		856D2AF7DAACFD59518CBFC32DEB2A7B /* Pods-Vinci_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Vinci_Example-umbrella.h"; sourceTree = "<group>"; };
-		8BE23E4EE2C5DB08E45B8AB774D7D9AD /* VinciCache.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = VinciCache.swift; path = Vinci/Classes/VinciCache.swift; sourceTree = "<group>"; };
 		8C8F7A73391BC7723CE53793B4515FFC /* Vinci-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Vinci-prefix.pch"; sourceTree = "<group>"; };
 		96A65ABD3E4B851F1FFD1083988C66FF /* Pods-Vinci_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Vinci_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		9EC9AABDFE7081FD066CCF08B23CAB6D /* VinciRequest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = VinciRequest.swift; path = Vinci/Classes/VinciRequest.swift; sourceTree = "<group>"; };
 		A2818DB6A22F717E12124C5E935F63E9 /* Vinci-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Vinci-dummy.m"; sourceTree = "<group>"; };
 		A734F34BC49880E194F325D23CFE2BFA /* Pods-Vinci_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Vinci_Example-acknowledgements.plist"; sourceTree = "<group>"; };
 		C46BD305EAA54FFDBE4718701B3C6ECB /* Pods-Vinci_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Vinci_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		D500BC80B7DF345E5EE5131B2A53C409 /* Pods-Vinci_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Vinci_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		E07434CEC75EBFCB34CDA6E4FC6C9230 /* Vinci.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = Vinci.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		E1E17A6C22D7DA8D001DA62A /* Transformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Transformer.swift; path = Sources/Vinci/Transformer.swift; sourceTree = "<group>"; };
+		E1E17A6D22D7DA8D001DA62A /* UIColor+Hex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIColor+Hex.swift"; path = "Sources/Vinci/UIColor+Hex.swift"; sourceTree = "<group>"; };
+		E1E17A6E22D7DA8D001DA62A /* VinciCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VinciCache.swift; path = Sources/Vinci/VinciCache.swift; sourceTree = "<group>"; };
+		E1E17A6F22D7DA8D001DA62A /* UIImage+Transforms.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIImage+Transforms.swift"; path = "Sources/Vinci/UIImage+Transforms.swift"; sourceTree = "<group>"; };
+		E1E17A7022D7DA8D001DA62A /* Data+Base64.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Data+Base64.swift"; path = "Sources/Vinci/Data+Base64.swift"; sourceTree = "<group>"; };
+		E1E17A7122D7DA8D001DA62A /* VinciRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VinciRequest.swift; path = Sources/Vinci/VinciRequest.swift; sourceTree = "<group>"; };
+		E1E17A7222D7DA8D001DA62A /* VinciRequestOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VinciRequestOperation.swift; path = Sources/Vinci/VinciRequestOperation.swift; sourceTree = "<group>"; };
+		E1E17A7322D7DA8D001DA62A /* Vinci.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Vinci.swift; path = Sources/Vinci/Vinci.swift; sourceTree = "<group>"; };
 		ECF2A2B0720AE923C22BED3192888BE0 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		FC3A8E05D094F48F5971365441F1B3E6 /* Pods-Vinci_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Vinci_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
-		FDB256C4CCF0D9EE012B28B40BE5E7A6 /* UIColor+Hex.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UIColor+Hex.swift"; path = "Vinci/Classes/UIColor+Hex.swift"; sourceTree = "<group>"; };
 		FF26F48F442B2EA64D32354633C44EE6 /* Pods-Vinci_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Vinci_Tests-umbrella.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -127,14 +126,14 @@
 		407B3F85BC37E6D467ECEA73E811547A /* Vinci */ = {
 			isa = PBXGroup;
 			children = (
-				7B40D0175D6ADD0738EFA55298F45A7B /* Data+Base64.swift */,
-				4A0C3C5A9A92A7368DF36B4715F1F956 /* Transformer.swift */,
-				FDB256C4CCF0D9EE012B28B40BE5E7A6 /* UIColor+Hex.swift */,
-				47971308771230B830C6975E8D9FE7D3 /* UIImage+Transforms.swift */,
-				1629CDD7BF101432ED30AB457D04873D /* Vinci.swift */,
-				8BE23E4EE2C5DB08E45B8AB774D7D9AD /* VinciCache.swift */,
-				9EC9AABDFE7081FD066CCF08B23CAB6D /* VinciRequest.swift */,
-				1F586BF3190F20699C9ECBDFA0070D1D /* VinciRequestOperation.swift */,
+				E1E17A7022D7DA8D001DA62A /* Data+Base64.swift */,
+				E1E17A6C22D7DA8D001DA62A /* Transformer.swift */,
+				E1E17A6D22D7DA8D001DA62A /* UIColor+Hex.swift */,
+				E1E17A6F22D7DA8D001DA62A /* UIImage+Transforms.swift */,
+				E1E17A7322D7DA8D001DA62A /* Vinci.swift */,
+				E1E17A6E22D7DA8D001DA62A /* VinciCache.swift */,
+				E1E17A7122D7DA8D001DA62A /* VinciRequest.swift */,
+				E1E17A7222D7DA8D001DA62A /* VinciRequestOperation.swift */,
 				784954FC7E1728E9AACAB961EEAFB855 /* Pod */,
 				868771BE2F49F2D21B0E90852F746EC0 /* Support Files */,
 			);
@@ -342,7 +341,7 @@
 				LastUpgradeCheck = 1020;
 				TargetAttributes = {
 					F357F171F9D24318DC4C3A04469EF43B = {
-						LastSwiftMigration = 1020;
+						LastSwiftMigration = 1100;
 					};
 				};
 			};
@@ -395,15 +394,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2BAF108F1DE6E0A4A7A4DEE12EE41BC2 /* Data+Base64.swift in Sources */,
-				8F565973E76B6B2522EE8BC84A3BDACA /* Transformer.swift in Sources */,
-				65A52A49BBFDDD3AC1B40E35DD05CF39 /* UIColor+Hex.swift in Sources */,
-				264960A6F76E5F36C715636DD63B609E /* UIImage+Transforms.swift in Sources */,
-				B4EF68B0800D79855626197FA748C65E /* Vinci-dummy.m in Sources */,
-				BFEC378D5E9CFFBC25A8567C4AFB8685 /* Vinci.swift in Sources */,
-				EF2034FCC9898552D17E6B09FD53E1FF /* VinciCache.swift in Sources */,
-				965EC582FD876073D5011B7CA8D3CD29 /* VinciRequest.swift in Sources */,
-				A1FC9F71F62606D112FC1F710D1E9265 /* VinciRequestOperation.swift in Sources */,
+				E1E17A7422D7DA8D001DA62A /* Transformer.swift in Sources */,
+				E1E17A7822D7DA8D001DA62A /* Data+Base64.swift in Sources */,
+				E1E17A7622D7DA8D001DA62A /* VinciCache.swift in Sources */,
+				E1E17A7722D7DA8D001DA62A /* UIImage+Transforms.swift in Sources */,
+				E1E17A7522D7DA8D001DA62A /* UIColor+Hex.swift in Sources */,
+				E1E17A7922D7DA8D001DA62A /* VinciRequest.swift in Sources */,
+				E1E17A7A22D7DA8D001DA62A /* VinciRequestOperation.swift in Sources */,
+				E1E17A7B22D7DA8D001DA62A /* Vinci.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -445,6 +443,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0D8585A448416B00526225784B2C06B0 /* Vinci.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -707,6 +706,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0D8585A448416B00526225784B2C06B0 /* Vinci.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -728,6 +728,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
