@@ -87,19 +87,19 @@ open class Vinci {
     }
 
     /// Factory method to create and configure a `VinciRequest` instance with the supplied URL,
-    /// transform handler and completion handler.
+    /// modifiers and completion handler.
     ///
     /// - Parameters:
     ///   - url: The URL to pass to the request.
-    ///   - transformHandler: The request tranform handler.
+    ///   - modifiers: The modifiers to apply.
     ///   - completionHandler: The request completion handler
     /// - Returns: A new `VinciRequest` instance.
     @discardableResult
     public func request(with url: URL,
-                        transformers: [Transformer]?,
+                        modifiers: [Modifier]?,
                         completionHandler: @escaping VinciRequest.CompletionHandler) -> VinciRequest {
         let request = VinciRequest(vinci: self)
-        request.get(url: url, transformers: transformers, completionHandler: completionHandler)
+        request.get(url: url, modifiers: modifiers, completionHandler: completionHandler)
         return request
     }
     
@@ -108,11 +108,10 @@ open class Vinci {
     ///
     /// - Parameters:
     ///   - url: The URL to pass to the request.
-    ///   - transformHandler: The request tranform handler.
     /// - Returns: A new `VinciRequest` instance.
     @discardableResult
     public func request(with url: URL, completionHandler: @escaping VinciRequest.CompletionHandler) -> VinciRequest {
-        return self.request(with: url, transformers: nil, completionHandler: completionHandler)
+        return self.request(with: url, modifiers: nil, completionHandler: completionHandler)
     }
     
     // MARK: - Operations
@@ -147,16 +146,16 @@ extension Vinci {
     
     // MARK: - Utilities
     
-    /// Generates a URL from the supplied `URL` and `Transformer` instances.
-    /// The generated URL uses each transformer's `identifier` property to uniquely identify
-    /// the transformed image.
+    /// Generates a URL from the supplied `URL` and `Modifier` instances.
+    /// The generated URL uses each modier's `identifier` property to uniquely identify
+    /// the modified image.
     ///
     /// - Parameters:
     ///   - url: The base URL of the image resource.
-    ///   - transformers: An array of transformers.
+    ///   - modifiers: The modifiers to apply.
     /// - Returns: The generated URL.
-    func keyFor(url: URL, transformers: [Transformer]) -> URL {
-        let identifiers = transformers.map { "[\($0.identifier)]" }
+    func keyFor(url: URL, modifiers: [Modifier]) -> URL {
+        let identifiers = modifiers.map { "[\($0.identifier)]" }
         return url.appendingPathComponent(identifiers.joined(separator: ""))
     }
 }

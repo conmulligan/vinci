@@ -15,8 +15,8 @@ Note: Vinci is early in development and, although stable, is missing some import
 - Asychronous image downloading (0.1.0).
 - Download queue (0.1.0).
 - Combined memory and disk cache (0.1.0).
-- Image transformers (0.2.0).
-- Support for caching images post-transformation (0.2.0).
+- Image modifiers (0.2.0).
+- Support for caching images post-modification (0.2.0).
 
 ### Outstanding
 - Automatic cache expiration.
@@ -40,26 +40,26 @@ let cache = VinciCache()
 let vinci = Vinci(session: session, cache: cache)
 ```
 
-### Transformers
+### Modifiers
 
-You can pass an optional array of `Transformers` to modify the image before it's passed to the completion hander:
+You can pass an optional array of `Modifiers` to change the image before it's passed to the completion hander:
 
 ```swift
-let transformers: [Transformer] = [
-    MonoTransformer(color: UIColor.gray, intensity: 1.0),
-    ScaleTransformer(size: imageView.frame.size)
+let modifiers: [Modifier] = [
+    MonoModifier(color: UIColor.gray, intensity: 1.0),
+    ScaleModifier(size: imageView.frame.size)
 ]
-Vinci.shared.request(with: url, transformers: transformers) { (image, isCached) in
+Vinci.shared.request(with: url, modifiers: modifiers) { (image, isCached) in
     imageView.image = image
 }
 ```
-Vinci includes a number of transformers by default:
+Vinci includes a number of modifiers by default:
 
-* `ScaleTransformer` scales an image to a specific size.
-* `MonoTransformer` uses `CIColorMonochrome` to color tint an image.
-* `ClosureTransformer` accepts a closure which applies a custom transformation.
+* `ScaleModifier` scales an image to a specific size.
+* `MonoModifier` uses `CIColorMonochrome` to color tint an image.
+* `ClosureModifier` accepts a closure which applies a custom modification.
 
-Additional transformers can be created by implementing the `Transformer` protocol.
+Additional modifiers can be created by implementing the `Modifier` protocol.
 
 ## Example
 

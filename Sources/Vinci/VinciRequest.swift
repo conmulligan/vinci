@@ -26,7 +26,7 @@
 import os.log
 import UIKit
 
-/// Fetches and transforms an image from a remote URL.
+/// Fetches and modifies an image from a remote URL.
 open class VinciRequest {
     
     /// The completion handler.
@@ -55,21 +55,21 @@ open class VinciRequest {
     ///   - url: The URL of an image to fetch.
     ///   - completionHandler: A completion handler which is called when the request finishes.
     public func get(url: URL, completionHandler: @escaping CompletionHandler) {
-        self.get(url: url, transformers: nil, completionHandler: completionHandler)
+        self.get(url: url, modifiers: nil, completionHandler: completionHandler)
     }
 
-    /// Fetches and transforms an image from a remote URL.
+    /// Fetches and modifies an image from a remote URL.
     ///
     /// - Parameters:
     ///   - url: The URL of an image to fetch.
-    ///   - transformHandler: A transform handler responsible for transforming and return the supplied image.
+    ///   - modifiers: The modifiers to apply.
     ///   - completionHandler: A completion handler which is called when the request finishes.
-    public func get(url: URL, transformers: [Transformer]?, completionHandler: @escaping CompletionHandler) {
+    public func get(url: URL, modifiers: [Modifier]?, completionHandler: @escaping CompletionHandler) {
         
         // Check if a memory cached version of the image exists.
-        if let image = self.cachedImage(for: url, transformers: transformers, memoryOnly: true) {
+        if let image = self.cachedImage(for: url, modifiers: modifiers, memoryOnly: true) {
             if Vinci.debugMode {
-                os_log("Returning memory cached transformed image for %@.", type: .debug, url.path)
+                os_log("Returning memory cached modified image for %@.", type: .debug, url.path)
             }
             
             completionHandler(image, true)
@@ -80,9 +80,9 @@ open class VinciRequest {
         DispatchQueue.global(qos: .userInitiated).async {
             
             // Check if a memory cached version of the image exists.
-            if let image = self.cachedImage(for: url, transformers: transformers, memoryOnly: false) {
+            if let image = self.cachedImage(for: url, modifiers: modifiers, memoryOnly: false) {
                 if Vinci.debugMode {
-                    os_log("Returning disk cached transformed image for %@.", type: .debug, url.path)
+                    os_log("Returning disk cached modified image for %@.", type: .debug, url.path)
                 }
                 
                 // Return the image on the main thread.
@@ -106,11 +106,11 @@ open class VinciRequest {
                 // Cache the unmodified image.
                 self.vinci.cache.setObject(image, forKey: url)
                 
-                // If any transformers have been set, cache the transformed image.
-                if let transformers = transformers, transformers.count > 0 {
-                    image = self.doTransforms(image: image, transformers: transformers)
+                // If any modifiers have been set, cache the modified image.
+                if let modifiers = modifiers, modifiers.count > 0 {
+                    image = self.modify(image: image, modifiers: modifiers)
                     
-                    self.vinci.cache.setObject(image, forKey: self.vinci.keyFor(url: url, transformers: transformers))
+                    self.vinci.cache.setObject(image, forKey: self.vinci.keyFor(url: url, modifiers: modifiers))
                 }
                 
                 // Return the image on the main thread.
@@ -129,15 +129,15 @@ open class VinciRequest {
         operation?.cancel()
     }
     
-    private func cachedImage(for url: URL, transformers: [Transformer]?, memoryOnly: Bool) -> UIImage? {
+    private func cachedImage(for url: URL, modifiers: [Modifier]?, memoryOnly: Bool) -> UIImage? {
         var image: UIImage? = nil
         
-        // If any transformers have been set, check if a check version of the image exists.
-        if let transformers = transformers, transformers.count > 0 {
+        // If any modifiers have been set, check if a check version of the image exists.
+        if let modifiers = modifiers, modifiers.count > 0 {
             if memoryOnly {
-                image = self.vinci.cache.objectFromMemory(forKey: self.vinci.keyFor(url: url, transformers: transformers))
+                image = self.vinci.cache.objectFromMemory(forKey: self.vinci.keyFor(url: url, modifiers: modifiers))
             } else {
-                image = self.vinci.cache.object(forKey: self.vinci.keyFor(url: url, transformers: transformers))
+                image = self.vinci.cache.object(forKey: self.vinci.keyFor(url: url, modifiers: modifiers))
             }
         }
         
@@ -150,11 +150,11 @@ open class VinciRequest {
             }
             
             if image != nil {
-                // If any transformers have been set, cache the transformed image.
-                if let transformers = transformers, transformers.count > 0 {
-                    image = self.doTransforms(image: image!, transformers: transformers)
+                // If any modifiers have been set, cache the modified image.
+                if let modifiers = modifiers, modifiers.count > 0 {
+                    image = self.modify(image: image!, modifiers: modifiers)
                     
-                    self.vinci.cache.setObject(image!, forKey: self.vinci.keyFor(url: url, transformers: transformers))
+                    self.vinci.cache.setObject(image!, forKey: self.vinci.keyFor(url: url, modifiers: modifiers))
                 }
             }
         }
@@ -162,17 +162,17 @@ open class VinciRequest {
         return image
     }
     
-    /// Executes all the supplied transformers and returns the modified image.
+    /// Executes all the supplied modifiers and returns the modified image.
     ///
     /// - Parameters:
-    ///   - image: The image to transform.
-    ///   - transformers: An array of `Transformer` instances.
-    /// - Returns: The transformed image.
-    private func doTransforms(image: UIImage, transformers: [Transformer]?) -> UIImage {
+    ///   - image: The image to modify.
+    ///   - modifiers: An array of `Modifier` instances.
+    /// - Returns: The modified image.
+    private func modify(image: UIImage, modifiers: [Modifier]?) -> UIImage {
         var img = image
-        if let transformers = transformers {
-            for transformer in transformers {
-                img = transformer.doTransform(image: img)
+        if let modifiers = modifiers {
+            for modifier in modifiers {
+                img = modifier.modify(image: img)
             }
         }
         return img

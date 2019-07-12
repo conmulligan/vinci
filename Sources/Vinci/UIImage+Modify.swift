@@ -1,5 +1,5 @@
 //
-//  UIImage+Transforms.swift
+//  UIImage+Modify.swift
 //  Vinci
 //
 //  Created by Conor Mulligan on 14/07/2018.
@@ -24,7 +24,7 @@
 
 import UIKit
 
-/// Extend `UIImage` with convenience transformation methods.
+/// Extend `UIImage` with convenience modifiier methods.
 extension UIImage {
     
     /// Returns a copy of the current image scaled to the supplied size.

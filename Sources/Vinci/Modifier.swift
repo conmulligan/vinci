@@ -1,5 +1,5 @@
 //
-//  Transformer.swift
+//  Modifier.swift
 //  Vinci
 //
 //  Created by Conor Mulligan on 12/06/2018.
@@ -25,15 +25,15 @@
 import UIKit
 import CoreImage
 
-/// Transformers modify a `UIImage` instance in some way.
-public protocol Transformer {
+/// Modify a `UIImage` instance in some way.
+public protocol Modifier {
     var identifier: String { get }
     
-    func doTransform(image: UIImage) -> UIImage
+    func modify(image: UIImage) -> UIImage
 }
 
-/// Transforms an image using a custom closure.
-open class ClosureTransformer: Transformer {
+/// Modifies an image using a custom closure.
+open class ClosureModifier: Modifier {
     public var identifier: String
     var closure: (_ image: UIImage) -> UIImage
     
@@ -42,13 +42,13 @@ open class ClosureTransformer: Transformer {
         self.closure = closure
     }
     
-    public func doTransform(image: UIImage) -> UIImage {
+    public func modify(image: UIImage) -> UIImage {
         return self.closure(image)
     }
 }
 
 /// Scales an image to a specific size.
-open class ScaleTransformer: Transformer {
+open class ScaleModifier: Modifier {
     public var identifier: String {
         return "vinci.scale.\(self.size.width)x\(self.size.height)"
     }
@@ -59,14 +59,14 @@ open class ScaleTransformer: Transformer {
         self.size = size
     }
     
-    public func doTransform(image: UIImage) -> UIImage {
+    public func modify(image: UIImage) -> UIImage {
         return image.scaledImage(self.size)
     }
 }
 
 /// Remaps colors so they fall within shades of a single color using CIColorMonochrome.
 /// The default color is black.
-open class MonoTransformer: Transformer {
+open class MonoModifier: Modifier {
     public var identifier: String {
         return "vinci.mono.\(self.color.hexString)_\(self.intensity)"
     }
@@ -89,7 +89,7 @@ open class MonoTransformer: Transformer {
         self.intensity = intensity
     }
     
-    public func doTransform(image: UIImage) -> UIImage {
+    public func modify(image: UIImage) -> UIImage {
         guard let cgImage = image.cgImage else { return image }
         
         let ciImage = CIImage(cgImage: cgImage)

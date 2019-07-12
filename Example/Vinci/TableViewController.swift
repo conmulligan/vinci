@@ -22,15 +22,15 @@ struct EntityResponse: Decodable {
     let results: [Entity]
 }
 
-/// An example of a custom transformer that applies a gaussian blur filter to the image.
-open class BlurTransformer: Transformer {
+/// An example of a custom modifier that applies a gaussian blur filter to the image.
+open class BlurModifier: Modifier {
     public var identifier: String
     
     public init() {
         self.identifier = "vinci.example.blur"
     }
     
-    public func doTransform(image: UIImage) -> UIImage {
+    public func modify(image: UIImage) -> UIImage {
         let ciImage = CIImage(cgImage: image.cgImage!)
         
         let filter = CIFilter(name: "CIGaussianBlur")
@@ -137,11 +137,11 @@ class TableViewController: UITableViewController {
         cell.subtitleLabel.text = entity.artistName
         
         if let str = entity.artworkUrl100, let url = URL(string: str) {
-            let transformers: [Transformer] = [
-                MonoTransformer(color: UIColor.gray, intensity: 1.0),
-                ScaleTransformer(size: cell.photoView.frame.size)
+            let modifiers: [Modifier] = [
+                MonoModifier(color: UIColor.gray, intensity: 1.0),
+                ScaleModifier(size: cell.photoView.frame.size)
             ]
-            Vinci.shared.request(with: url, transformers: transformers) { (image, isCached) in
+            Vinci.shared.request(with: url, modifier: modifier) { (image, isCached) in
                 if cell.tag == indexPath.row {
                     cell.photoView.image = image
                 }
