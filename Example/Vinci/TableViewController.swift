@@ -141,7 +141,7 @@ class TableViewController: UITableViewController {
                 MonoModifier(color: UIColor.gray, intensity: 1.0),
                 ScaleModifier(size: cell.photoView.frame.size)
             ]
-            Vinci.shared.request(with: url, modifier: modifier) { (image, isCached) in
+            Vinci.shared.request(with: url, modifiers: modifiers) { (image, isCached) in
                 if cell.tag == indexPath.row {
                     cell.photoView.image = image
                 }
