@@ -64,6 +64,23 @@ open class ScaleModifier: Modifier {
     }
 }
 
+/// Creates a thumbnail of the original image.
+open class ThumbnailModifier: Modifier {
+    public var identifier: String {
+        return "vinci.thumbnail.\(self.size.width)x\(self.size.height)"
+    }
+    
+    public var size: CGSize
+    
+    public init(size: CGSize) {
+        self.size = size
+    }
+    
+    public func modify(image: UIImage) -> UIImage {
+        return image.thumbailImage(self.size)
+    }
+}
+
 /// Remaps colors so they fall within shades of a single color using CIColorMonochrome.
 /// The default color is black.
 open class MonoModifier: Modifier {
