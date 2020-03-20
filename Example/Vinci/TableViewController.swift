@@ -74,13 +74,7 @@ class TableViewController: UITableViewController {
 
     /// Requests data from the iTunes Search API, parses the response and update the UI.
     func loadData() {
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
-        
         let task = URLSession.shared.dataTask(with: self.searchURL) { (data, response, error) in
-            DispatchQueue.main.async {
-                UIApplication.shared.isNetworkActivityIndicatorVisible = false
-            }
-            
             // If the data task returned nil data, show an error message.
             guard data != nil else {
                 let message = error?.localizedDescription ?? "data task returned nil data."

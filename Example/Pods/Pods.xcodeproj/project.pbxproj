@@ -15,7 +15,6 @@
 		A01576596BCD6A0705BBBB4BBCC1E49C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40CB39E715FBCDAA142E6513E126200A /* Foundation.framework */; };
 		CC955A5E80F10B05B8BDE449B6ED35D8 /* Vinci-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 151E36F866008D5664B015B1C97B664C /* Vinci-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CD78C0B3B59CC21F4EDC4D50258EACE0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40CB39E715FBCDAA142E6513E126200A /* Foundation.framework */; };
-		E1933C5622D95899005F2504 /* Data+Base64.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1933C4A22D9575D005F2504 /* Data+Base64.swift */; };
 		E1933C5722D95899005F2504 /* Modifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1933C4722D9575D005F2504 /* Modifier.swift */; };
 		E1933C5822D95899005F2504 /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1933C4922D9575D005F2504 /* UIColor+Hex.swift */; };
 		E1933C5922D95899005F2504 /* UIImage+Modify.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1933C4622D9575D005F2504 /* UIImage+Modify.swift */; };
@@ -23,6 +22,7 @@
 		E1933C5B22D95899005F2504 /* VinciCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1933C4822D9575D005F2504 /* VinciCache.swift */; };
 		E1933C5C22D95899005F2504 /* VinciRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1933C4B22D9575D005F2504 /* VinciRequest.swift */; };
 		E1933C5D22D95899005F2504 /* VinciRequestOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1933C4D22D9575D005F2504 /* VinciRequestOperation.swift */; };
+		E19719CC242444640002F867 /* String+MD5.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19719CA2424445D0002F867 /* String+MD5.swift */; };
 		FAB96D1ABFDA1D27952BCE367EB13A9D /* Pods-Vinci_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 856D2AF7DAACFD59518CBFC32DEB2A7B /* Pods-Vinci_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
@@ -77,10 +77,10 @@
 		E1933C4722D9575D005F2504 /* Modifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Modifier.swift; path = Sources/Vinci/Modifier.swift; sourceTree = "<group>"; };
 		E1933C4822D9575D005F2504 /* VinciCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VinciCache.swift; path = Sources/Vinci/VinciCache.swift; sourceTree = "<group>"; };
 		E1933C4922D9575D005F2504 /* UIColor+Hex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIColor+Hex.swift"; path = "Sources/Vinci/UIColor+Hex.swift"; sourceTree = "<group>"; };
-		E1933C4A22D9575D005F2504 /* Data+Base64.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Data+Base64.swift"; path = "Sources/Vinci/Data+Base64.swift"; sourceTree = "<group>"; };
 		E1933C4B22D9575D005F2504 /* VinciRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VinciRequest.swift; path = Sources/Vinci/VinciRequest.swift; sourceTree = "<group>"; };
 		E1933C4C22D9575D005F2504 /* Vinci.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Vinci.swift; path = Sources/Vinci/Vinci.swift; sourceTree = "<group>"; };
 		E1933C4D22D9575D005F2504 /* VinciRequestOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VinciRequestOperation.swift; path = Sources/Vinci/VinciRequestOperation.swift; sourceTree = "<group>"; };
+		E19719CA2424445D0002F867 /* String+MD5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "String+MD5.swift"; path = "Sources/Vinci/String+MD5.swift"; sourceTree = "<group>"; };
 		ECF2A2B0720AE923C22BED3192888BE0 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		FC3A8E05D094F48F5971365441F1B3E6 /* Pods-Vinci_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Vinci_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		FF26F48F442B2EA64D32354633C44EE6 /* Pods-Vinci_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Vinci_Tests-umbrella.h"; sourceTree = "<group>"; };
@@ -126,8 +126,8 @@
 		407B3F85BC37E6D467ECEA73E811547A /* Vinci */ = {
 			isa = PBXGroup;
 			children = (
-				E1933C4A22D9575D005F2504 /* Data+Base64.swift */,
 				E1933C4722D9575D005F2504 /* Modifier.swift */,
+				E19719CA2424445D0002F867 /* String+MD5.swift */,
 				E1933C4922D9575D005F2504 /* UIColor+Hex.swift */,
 				E1933C4622D9575D005F2504 /* UIImage+Modify.swift */,
 				E1933C4C22D9575D005F2504 /* Vinci.swift */,
@@ -341,7 +341,7 @@
 				LastUpgradeCheck = 1020;
 				TargetAttributes = {
 					45F45FEE3B72F5074FED2867002D608B = {
-						LastSwiftMigration = 1100;
+						LastSwiftMigration = 1130;
 					};
 					F357F171F9D24318DC4C3A04469EF43B = {
 						LastSwiftMigration = 1100;
@@ -400,9 +400,9 @@
 				E1933C5822D95899005F2504 /* UIColor+Hex.swift in Sources */,
 				E1933C5D22D95899005F2504 /* VinciRequestOperation.swift in Sources */,
 				E1933C5722D95899005F2504 /* Modifier.swift in Sources */,
+				E19719CC242444640002F867 /* String+MD5.swift in Sources */,
 				E1933C5C22D95899005F2504 /* VinciRequest.swift in Sources */,
 				E1933C5A22D95899005F2504 /* Vinci.swift in Sources */,
-				E1933C5622D95899005F2504 /* Data+Base64.swift in Sources */,
 				E1933C5B22D95899005F2504 /* VinciCache.swift in Sources */,
 				E1933C5922D95899005F2504 /* UIImage+Modify.swift in Sources */,
 			);
@@ -460,7 +460,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/Vinci/Vinci-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/Vinci/Vinci-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/Vinci/Vinci.modulemap";
 				PRODUCT_MODULE_NAME = Vinci;
@@ -525,7 +525,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -553,7 +553,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = "Target Support Files/Pods-Vinci_Tests/Pods-Vinci_Tests-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/Pods-Vinci_Tests/Pods-Vinci_Tests.modulemap";
@@ -588,7 +588,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = "Target Support Files/Pods-Vinci_Example/Pods-Vinci_Example-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/Pods-Vinci_Example/Pods-Vinci_Example.modulemap";
@@ -659,7 +659,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -689,7 +689,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = "Target Support Files/Pods-Vinci_Tests/Pods-Vinci_Tests-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/Pods-Vinci_Tests/Pods-Vinci_Tests.modulemap";
@@ -725,7 +725,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/Vinci/Vinci-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/Vinci/Vinci-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/Vinci/Vinci.modulemap";
 				PRODUCT_MODULE_NAME = Vinci;
@@ -759,7 +759,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = "Target Support Files/Pods-Vinci_Example/Pods-Vinci_Example-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/Pods-Vinci_Example/Pods-Vinci_Example.modulemap";

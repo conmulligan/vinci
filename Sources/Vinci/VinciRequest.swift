@@ -24,7 +24,10 @@
 //  SOFTWARE.
 
 import os.log
+import Foundation
+#if canImport(UIKit)
 import UIKit
+#endif
 
 /// Fetches and modifies an image from a remote URL.
 open class VinciRequest {

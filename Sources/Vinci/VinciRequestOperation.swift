@@ -24,7 +24,10 @@
 //  SOFTWARE.
 
 import os.log
+import Foundation
+#if canImport(UIKit)
 import UIKit
+#endif
 
 /// An operation that wraps `VinciRequest` for use in an `OperationQueue`.
 class VinciRequestOperation: Operation {

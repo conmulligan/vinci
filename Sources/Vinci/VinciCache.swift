@@ -24,7 +24,10 @@
 //  SOFTWARE.
 
 import os.log
+import Foundation
+#if canImport(UIKit)
 import UIKit
+#endif
 
 /// A combined memory and disk cache for downloaded images.
 open class VinciCache {
@@ -80,7 +83,7 @@ open class VinciCache {
     /// - returns: A `UIImage` instance if one exists; otherwise, nil.
     public func objectFromDisk(forKey key: URL) -> UIImage? {
         var image: UIImage?
-        let filename = key.path.data(using: .utf8)!.base64URLEncodedString()
+        let filename = key.path.MD5
         let url = directory.appendingPathComponent(filename)
         
         if FileManager.default.fileExists(atPath: url.path) {
@@ -110,7 +113,7 @@ open class VinciCache {
         self.memCache.setObject(obj, forKey: key as NSURL)
 
         // Second, persist the image to disk.
-        let filename = key.path.data(using: .utf8)!.base64URLEncodedString()
+        let filename = key.path.MD5
         let manager = FileManager.default
         let url = self.directory.appendingPathComponent(filename)
 

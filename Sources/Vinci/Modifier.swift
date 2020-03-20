@@ -22,7 +22,10 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
+import Foundation
+#if canImport(UIKit)
 import UIKit
+#endif
 import CoreImage
 
 /// Modify a `UIImage` instance in some way.
