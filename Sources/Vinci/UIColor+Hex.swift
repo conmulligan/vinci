@@ -23,21 +23,20 @@
 //  SOFTWARE.
 
 import Foundation
-#if canImport(UIKit)
 import UIKit
-#endif
 
 extension UIColor {
+
+    /// Returns a hex string representation of this color.
     var hexString: String {
         var r: CGFloat = 0
         var g: CGFloat = 0
         var b: CGFloat = 0
         var a: CGFloat = 0
-        
-        self.getRed(&r, green: &g, blue: &b, alpha: &a)
-        
-        let rgb: Int = (Int) (r * 255) << 16 | (Int) (g * 255) << 8 | (Int) (b * 255) << 0
-        
-        return String(format:"#%06x", rgb)
+
+        getRed(&r, green: &g, blue: &b, alpha: &a)
+
+        let rgb = (Int) (r * 255) << 16 | (Int) (g * 255) << 8 | (Int) (b * 255) << 0
+        return String(format: "#%06x", rgb)
     }
 }

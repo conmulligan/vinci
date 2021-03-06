@@ -12,11 +12,12 @@ class PhotoCell: UITableViewCell {
     @IBOutlet var photoView: UIImageView!
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var subtitleLabel: UILabel!
-    
+
     override func prepareForReuse() {
         super.prepareForReuse()
-        self.photoView.image = nil
-        self.titleLabel.text = nil
-        self.subtitleLabel.text = nil
+
+        photoView.image = nil
+        titleLabel.text = nil
+        subtitleLabel.text = nil
     }
 }

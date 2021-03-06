@@ -12,8 +12,6 @@ extension String {
 
     /// Returns an MD5 hash represenation of the current string.
     var MD5: String {
-        let data = Data(self.utf8)
-        let digest = Insecure.MD5.hash(data: data)
-        return digest.map { String(format: "%02hhx", $0) }.joined()
+        Insecure.MD5.hash(data: Data(utf8)).map { String(format: "%02hhx", $0) }.joined()
     }
 }

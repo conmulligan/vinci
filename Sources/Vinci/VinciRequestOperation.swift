@@ -25,13 +25,11 @@
 
 import os.log
 import Foundation
-#if canImport(UIKit)
 import UIKit
-#endif
 
 /// An operation that wraps `VinciRequest` for use in an `OperationQueue`.
 class VinciRequestOperation: Operation {
-    
+
     /// The closure to call when a request finishes.
     typealias CompletionHandler = (UIImage?, URLResponse?, Error?) -> Void
 
@@ -40,11 +38,9 @@ class VinciRequestOperation: Operation {
         case ready
         case executing
         case finished
-        
+
         private var keyPath: String {
-            get {
-                return "is" + self.rawValue
-            }
+            "is" + rawValue
         }
     }
 
@@ -62,23 +58,17 @@ class VinciRequestOperation: Operation {
 
     /// Marks the operation as asynchronous.
     override var isAsynchronous: Bool {
-        get {
-            return true
-        }
+        true
     }
 
     /// Marks the request as executing.
     override var isExecuting: Bool {
-        get {
-            return self.state == .executing
-        }
+        state == .executing
     }
 
     /// Marks the request as finished.
     override var isFinished: Bool {
-        get {
-            return self.state == .finished
-        }
+        state == .finished
     }
 
     /// The operation description.
@@ -94,7 +84,7 @@ class VinciRequestOperation: Operation {
     private var url: URL!
 
     /// The completion handler to call when the request has finished.
-    private var completionHandler: CompletionHandler!
+    private var completion: CompletionHandler!
 
     /// The underlying `URLSession` data task.
     private var dataTask: URLSessionDataTask?
@@ -106,63 +96,63 @@ class VinciRequestOperation: Operation {
     /// - Parameters:
     ///   - session: The `URLSession` to use.
     ///   - url: The URL of the image to fetch.
-    ///   - completionHandler: A completion handler which is called when the request finishes.
-    init(session: URLSession, url: URL, completionHandler: @escaping CompletionHandler) {
+    ///   - completion: A completion handler which is called when the request finishes.
+    init(session: URLSession, url: URL, completion: @escaping CompletionHandler) {
         super.init()
-        
+
         self.session = session
         self.url = url
-        self.completionHandler = completionHandler
+        self.completion = completion
     }
 
     // MARK: - Operation Control
-    
+
     /// Start the operation.
     override func start() {
         if self.isCancelled {
-            self.state = .finished
+            state = .finished
             return
         }
-        
-        self.state = .ready
-        self.main()
+
+        state = .ready
+        main()
     }
 
     /// The operation's body.
     override func main() {
-        if self.isCancelled {
-            self.state = .finished
+        if isCancelled {
+            state = .finished
             return
         }
 
-        self.state = .executing
- 
-        self.dataTask = session.dataTask(with: url) { (data, response, error) in
-            var image: UIImage? = nil
-            
+        state = .executing
+
+        dataTask = session.dataTask(with: url) { (data, response, error) in
+            var image: UIImage?
+
             if let data = data {
                 image = UIImage(data: data)
             }
-            
-            self.completionHandler(image, response, error)
+
+            self.completion(image, response, error)
             self.finish()
         }
-        
+
         self.dataTask?.resume()
     }
 
     /// Cancels the operation.
     override func cancel() {
         super.cancel()
-        
-        self.dataTask?.cancel()
-        self.finish()
+
+        dataTask?.cancel()
+        finish()
     }
 
     /// Finish the operation.
     func finish() {
-        if self.isExecuting {
-            self.state = .finished
+        if isExecuting {
+            state = .finished
         }
     }
 }

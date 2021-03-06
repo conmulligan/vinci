@@ -27,7 +27,6 @@ import Foundation
 
 /// Represents a Vinci error.
 public struct VinciError: Error {
-    
     /// The error message.
     let message: String
 }
@@ -35,55 +34,51 @@ public struct VinciError: Error {
 /// Conform to `LocalizedError`.
 extension VinciError: LocalizedError {
     public var errorDescription: String? {
-        return NSLocalizedString(self.message, comment: "")
+        NSLocalizedString(message, comment: "")
     }
 }
 
 /// The Vinci class is the entry point for all requests.
 /// It includes a factory method for initializing and configuring `VinciRequest` objects.
 open class Vinci {
-    
+
     /// The `URLSession` used for all requests.
-    internal var session: URLSession!
-    
+    public let session: URLSession
+
     /// The shared cache.
-    internal var cache: VinciCache!
-    
+    public let cache: VinciCache
+
+    /// Debug mode enabled.
+    public var debugEnabled = false
+
+    /// The shared `Vinci` instance.
+    public static let shared = Vinci(session: URLSession.shared)
+
     /// The queue on which all requests are performed.
     private static var operationQueue: OperationQueue = {
         let queue = OperationQueue()
         queue.maxConcurrentOperationCount = 8
         return queue
     }()
-    
-    /// The shared `Vinci` instance.
-    public static let shared = Vinci(session: URLSession.shared, cache: VinciCache())
-    
-    /// Debug mode enabled.
-    public static var debugMode = false
-    
+
     // MARK: - Initialization
-    
-    /// The default initializer.
-    required public init(session: URLSession, cache: VinciCache) {
+
+    /// Initialize a new Vinci instance.
+    /// - Parameters:
+    ///   - session: The URLSession instance.
+    ///   - cache: The cache instance.
+    public required init(session: URLSession, cache: VinciCache = VinciCache()) {
         self.session = session
         self.cache = cache
     }
-    
-    /// Initializes with a custom URLSession instance.
-    ///
-    /// - parameter session: The `URLSession` instance to use.
-    init(session: URLSession) {
-        self.session = session
-    }
-    
+
     // MARK: - Request Factory
-    
+
     /// Factory method to create and configure a `VinciRequest` instance.
     ///
     /// - returns: A new `VinciRequest` instance.
     public func request() -> VinciRequest {
-        return VinciRequest(vinci: self)
+        VinciRequest(vinci: self)
     }
 
     /// Factory method to create and configure a `VinciRequest` instance with the supplied URL,
@@ -92,17 +87,17 @@ open class Vinci {
     /// - Parameters:
     ///   - url: The URL to pass to the request.
     ///   - modifiers: The modifiers to apply.
-    ///   - completionHandler: The request completion handler
+    ///   - completion: The request completion handler
     /// - Returns: A new `VinciRequest` instance.
     @discardableResult
     public func request(with url: URL,
                         modifiers: [Modifier]?,
-                        completionHandler: @escaping VinciRequest.CompletionHandler) -> VinciRequest {
+                        completion: @escaping VinciRequest.CompletionHandler) -> VinciRequest {
         let request = VinciRequest(vinci: self)
-        request.get(url: url, modifiers: modifiers, completionHandler: completionHandler)
+        request.get(url: url, modifiers: modifiers, completion: completion)
         return request
     }
-    
+
     /// Factory method to create and configure a `VinciRequest` instance with the supplied URL
     /// and completion handler.
     ///
@@ -110,20 +105,20 @@ open class Vinci {
     ///   - url: The URL to pass to the request.
     /// - Returns: A new `VinciRequest` instance.
     @discardableResult
-    public func request(with url: URL, completionHandler: @escaping VinciRequest.CompletionHandler) -> VinciRequest {
-        return self.request(with: url, modifiers: nil, completionHandler: completionHandler)
+    public func request(with url: URL, completion: @escaping VinciRequest.CompletionHandler) -> VinciRequest {
+        request(with: url, modifiers: nil, completion: completion)
     }
-    
+
     // MARK: - Operations
-    
+
     /// Adds an operation to the queue and reweights the queue by assigning a higher priority to the latest operations.
     ///
     /// - parameter operation: An operation to add to the queue.
     internal func addOperation(_ operation: Operation) {
         Vinci.operationQueue.addOperation(operation)
-        
+
         let operations = Vinci.operationQueue.operations.reversed().enumerated()
-        
+
         for (index, operation) in operations {
             switch index {
             case 0:
@@ -143,9 +138,9 @@ open class Vinci {
 
 /// Extend Vinci with helper functions.
 extension Vinci {
-    
+
     // MARK: - Utilities
-    
+
     /// Generates a URL from the supplied `URL` and `Modifier` instances.
     /// The generated URL uses each modier's `identifier` property to uniquely identify
     /// the modified image.
@@ -155,7 +150,6 @@ extension Vinci {
     ///   - modifiers: The modifiers to apply.
     /// - Returns: The generated URL.
     func keyFor(url: URL, modifiers: [Modifier]) -> URL {
-        let identifiers = modifiers.map { "[\($0.identifier)]" }
-        return url.appendingPathComponent(identifiers.joined(separator: ""))
+        url.appendingPathComponent(modifiers.map { "[\($0.identifier)]" }.joined())
     }
 }

@@ -25,40 +25,38 @@
 
 import os.log
 import Foundation
-#if canImport(UIKit)
 import UIKit
-#endif
 
 /// Fetches and modifies an image from a remote URL.
 open class VinciRequest {
-    
+
     /// The completion handler.
     public typealias CompletionHandler = ((_ image: UIImage?, _ isCached: Bool) -> Void)
-    
+
     /// The `Vinci` context.
     private var vinci: Vinci
-    
+
     /// The operation associated with this request.
     private var operation: VinciRequestOperation?
-    
+
     // MARK: - Initialization
-    
+
     /// Initializes the request with the supplied `Vinci` instance.
     ///
     /// - parameter vinci: The `Vinci` context.
-    required public init(vinci: Vinci) {
+    public required init(vinci: Vinci) {
         self.vinci = vinci
     }
 
     // MARK: - Request
-    
+
     /// Fetches an image from a remote URL.
     ///
     /// - Parameters:
     ///   - url: The URL of an image to fetch.
-    ///   - completionHandler: A completion handler which is called when the request finishes.
-    public func get(url: URL, completionHandler: @escaping CompletionHandler) {
-        self.get(url: url, modifiers: nil, completionHandler: completionHandler)
+    ///   - completion: A completion handler which is called when the request finishes.
+    public func get(url: URL, completion: @escaping CompletionHandler) {
+        get(url: url, modifiers: nil, completion: completion)
     }
 
     /// Fetches and modifies an image from a remote URL.
@@ -66,62 +64,62 @@ open class VinciRequest {
     /// - Parameters:
     ///   - url: The URL of an image to fetch.
     ///   - modifiers: The modifiers to apply.
-    ///   - completionHandler: A completion handler which is called when the request finishes.
-    public func get(url: URL, modifiers: [Modifier]?, completionHandler: @escaping CompletionHandler) {
-        
+    ///   - completion: A completion handler which is called when the request finishes.
+    public func get(url: URL, modifiers: [Modifier]?, completion: @escaping CompletionHandler) {
+
         // Check if a memory cached version of the image exists.
-        if let image = self.cachedImage(for: url, modifiers: modifiers, memoryOnly: true) {
-            if Vinci.debugMode {
+        if let image = cachedImage(for: url, modifiers: modifiers, memoryOnly: true) {
+            if self.vinci.debugEnabled {
                 os_log("Returning memory cached modified image for %@.", type: .debug, url.path)
             }
-            
-            completionHandler(image, true)
+
+            completion(image, true)
             return
         }
 
         // Check the disk cache on a background thread.
         DispatchQueue.global(qos: .userInitiated).async {
-            
+
             // Check if a memory cached version of the image exists.
             if let image = self.cachedImage(for: url, modifiers: modifiers, memoryOnly: false) {
-                if Vinci.debugMode {
+                if self.vinci.debugEnabled {
                     os_log("Returning disk cached modified image for %@.", type: .debug, url.path)
                 }
-                
+
                 // Return the image on the main thread.
                 DispatchQueue.main.async {
-                    completionHandler(image, true)
+                    completion(image, true)
                 }
                 return
             }
 
             // Otherwise, create a data task to fetch the image.
-            self.operation = VinciRequestOperation(session: self.vinci.session, url: url) { (image, response, error) in
-                
+            self.operation = VinciRequestOperation(session: self.vinci.session, url: url) { (image, _, _) in
+
                 // If the image is nil, call the completion handler and bail out.
                 guard var image = image else {
                     DispatchQueue.main.async {
-                        completionHandler(nil, false)
+                        completion(nil, false)
                     }
                     return
                 }
-                
+
                 // Cache the unmodified image.
                 self.vinci.cache.setObject(image, forKey: url)
-                
+
                 // If any modifiers have been set, cache the modified image.
-                if let modifiers = modifiers, modifiers.count > 0 {
+                if let modifiers = modifiers, !modifiers.isEmpty {
                     image = self.modify(image: image, modifiers: modifiers)
-                    
+
                     self.vinci.cache.setObject(image, forKey: self.vinci.keyFor(url: url, modifiers: modifiers))
                 }
-                
+
                 // Return the image on the main thread.
                 DispatchQueue.main.async {
-                    completionHandler(image, false)
+                    completion(image, false)
                 }
             }
-            
+
             // Queue the request operation.
             self.vinci.addOperation(self.operation!)
         }
@@ -131,40 +129,40 @@ open class VinciRequest {
     public func cancel() {
         operation?.cancel()
     }
-    
+
     private func cachedImage(for url: URL, modifiers: [Modifier]?, memoryOnly: Bool) -> UIImage? {
-        var image: UIImage? = nil
-        
+        var image: UIImage?
+
         // If any modifiers have been set, check if a check version of the image exists.
-        if let modifiers = modifiers, modifiers.count > 0 {
+        if let modifiers = modifiers, !modifiers.isEmpty {
             if memoryOnly {
-                image = self.vinci.cache.objectFromMemory(forKey: self.vinci.keyFor(url: url, modifiers: modifiers))
+                image = vinci.cache.objectFromMemory(forKey: vinci.keyFor(url: url, modifiers: modifiers))
             } else {
-                image = self.vinci.cache.object(forKey: self.vinci.keyFor(url: url, modifiers: modifiers))
+                image = vinci.cache.object(forKey: vinci.keyFor(url: url, modifiers: modifiers))
             }
         }
-        
+
         // Check if an in-memory cached version of the image exists.
         if image == nil {
             if memoryOnly {
-                image = self.vinci.cache.objectFromMemory(forKey: url)
+                image = vinci.cache.objectFromMemory(forKey: url)
             } else {
-                image = self.vinci.cache.object(forKey: url)
+                image = vinci.cache.object(forKey: url)
             }
-            
+
             if image != nil {
                 // If any modifiers have been set, cache the modified image.
-                if let modifiers = modifiers, modifiers.count > 0 {
-                    image = self.modify(image: image!, modifiers: modifiers)
-                    
-                    self.vinci.cache.setObject(image!, forKey: self.vinci.keyFor(url: url, modifiers: modifiers))
+                if let modifiers = modifiers, !modifiers.isEmpty {
+                    image = modify(image: image!, modifiers: modifiers)
+
+                    vinci.cache.setObject(image!, forKey: vinci.keyFor(url: url, modifiers: modifiers))
                 }
             }
         }
-        
+
         return image
     }
-    
+
     /// Executes all the supplied modifiers and returns the modified image.
     ///
     /// - Parameters:

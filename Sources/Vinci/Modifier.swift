@@ -23,15 +23,16 @@
 //  SOFTWARE.
 
 import Foundation
-#if canImport(UIKit)
 import UIKit
-#endif
-import CoreImage
 
 /// Modify a `UIImage` instance in some way.
 public protocol Modifier {
+
+    /// A unique identiier.
     var identifier: String { get }
-    
+
+    /// Modifies the supplied image and returns the result.
+    /// - Parameter image: The modified image.
     func modify(image: UIImage) -> UIImage
 }
 
@@ -39,48 +40,48 @@ public protocol Modifier {
 open class ClosureModifier: Modifier {
     public var identifier: String
     var closure: (_ image: UIImage) -> UIImage
-    
+
     public init(identifier: String, closure: @escaping (_ image: UIImage) -> UIImage) {
         self.identifier = identifier
         self.closure = closure
     }
-    
+
     public func modify(image: UIImage) -> UIImage {
-        return self.closure(image)
+        return closure(image)
     }
 }
 
 /// Scales an image to a specific size.
 open class ScaleModifier: Modifier {
     public var identifier: String {
-        return "vinci.scale.\(self.size.width)x\(self.size.height)"
+        "vinci.scale.\(size.width)x\(size.height)"
     }
-    
+
     public var size: CGSize
-    
+
     public init(size: CGSize) {
         self.size = size
     }
-    
+
     public func modify(image: UIImage) -> UIImage {
-        return image.scaledImage(self.size)
+        return image.scaledTo(size)
     }
 }
 
 /// Creates a thumbnail of the original image.
 open class ThumbnailModifier: Modifier {
     public var identifier: String {
-        return "vinci.thumbnail.\(self.size.width)x\(self.size.height)"
+        return "vinci.thumbnail.\(size.width)x\(size.height)"
     }
-    
+
     public var size: CGSize
-    
+
     public init(size: CGSize) {
         self.size = size
     }
-    
+
     public func modify(image: UIImage) -> UIImage {
-        return image.thumbailImage(self.size)
+        return image.thumbailImage(size)
     }
 }
 
@@ -88,41 +89,41 @@ open class ThumbnailModifier: Modifier {
 /// The default color is black.
 open class MonoModifier: Modifier {
     public var identifier: String {
-        return "vinci.mono.\(self.color.hexString)_\(self.intensity)"
+        return "vinci.mono.\(color.hexString)_\(intensity)"
     }
-    
+
     public var color = UIColor.black
     public var intensity: Float = 1.0
-    
+
     public init() {
-        
+
     }
-    
+
     public convenience init(color: UIColor) {
         self.init()
         self.color = color
     }
-    
+
     public convenience init(color: UIColor, intensity: Float) {
         self.init()
         self.color = color
         self.intensity = intensity
     }
-    
+
     public func modify(image: UIImage) -> UIImage {
         guard let cgImage = image.cgImage else { return image }
-        
+
         let ciImage = CIImage(cgImage: cgImage)
-        
+
         let filter = CIFilter(name: "CIColorMonochrome")
         filter?.setValue(ciImage, forKey: kCIInputImageKey)
-        filter?.setValue(CIColor(color: self.color), forKey: kCIInputColorKey)
-        filter?.setValue(self.intensity, forKey: kCIInputIntensityKey)
-        
+        filter?.setValue(CIColor(color: color), forKey: kCIInputColorKey)
+        filter?.setValue(intensity, forKey: kCIInputIntensityKey)
+
         guard let output = filter?.outputImage, let cgi = CIContext().createCGImage(output, from: output.extent) else {
             return image
         }
-        
+
         return UIImage(cgImage: cgi)
     }
 }
